@@ -10,4 +10,6 @@ export const searchSchema = z.object({
     }),
 })
 
+
+
 export type SearchFormValues = z.infer<typeof searchSchema>

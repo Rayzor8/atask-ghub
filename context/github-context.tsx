@@ -1,24 +1,8 @@
 "use client";
 
-import { GitHubState, Repository, User } from "@/lib/types";
+import { GitHubAction, GitHubState } from "@/lib/types";
 import type React from "react";
-
 import { createContext, useContext, useReducer, type ReactNode } from "react";
-
-
-
-type GitHubAction =
-  | { type: "SET_USERS"; payload: { users: User[]; totalCount: number } }
-  | {
-      type: "SET_REPOSITORIES";
-      payload: { repositories: Repository[]; totalCount: number };
-    }
-  | { type: "SET_USERS_PAGE"; payload: number }
-  | { type: "SET_REPOS_PAGE"; payload: number }
-  | { type: "SET_LOADING"; payload: boolean }
-  | { type: "SET_ERROR"; payload: string | null }
-  | { type: "SET_SEARCH_TERM"; payload: string };
-
 
 const initialState: GitHubState = {
   users: [],
@@ -114,7 +98,6 @@ interface GitHubContextType {
 }
 
 const GitHubContext = createContext<GitHubContextType | undefined>(undefined);
-
 
 export function GitHubProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(githubReducer, initialState);
